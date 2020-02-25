@@ -1,0 +1,261 @@
+{{> layouts/head }}
+{{> layouts/header }}
+<hr>
+<div class="container" id="product_page">
+    <div class="product-page-main-info">
+        <div class="image-wrapper">
+            <img src="/{{aromat.image_url}}" alt="">
+        </div>
+        <div class="product-info-wrapper">
+            <h1 class="prodcut_name">{{aromat.category_name}}</h1>
+            <p class="product_sex">{{aromat.sex.aromats_properties_value.value_name}} аромат</p>
+
+            <div class="row mt-5 mb-5 align-items-center">
+                <div class="col-md-4 d-xs-none"></div>
+                <div class="col-md-4 col-xs-12">
+                    <div id="product_rating_stars">
+                        {{#times ratings.ratingValue}}
+                            <i class="fas fa-star"></i>
+                        {{/times}}
+
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12 text-center text-sm-left">
+
+
+                    <a data-toggle="tab"
+                       href="#reviews" role="tab" aria-controls="contact"
+                       id="product_rating_text">{{pluralize rat_len one='1 отзыв' 2='2 отзыва' few='# отзыва'
+                                                            many='# отзывов'}}</a>
+                </div>
+            </div>
+
+            <table class="table" id="products_inside">
+                {{#each aromat.products}}
+                    <tr>
+                        <td>
+                            {{product_name}}
+                            <div class="d-block d-sm-none">
+                                <hr/>
+                                {{#if promoPrice}}
+                                    <b class="price" style="color:red;">{{promoPrice}}</b> руб
+                                {{else}}
+                                    <b class="price">{{price}}</b> руб
+                                {{/if}}
+                            </div>
+                        </td>
+                        {{#if promoPrice}}
+                            <td class="d-none d-sm-table-cell"><b class="price" style="color:red;">{{promoPrice}}</b>
+                                руб
+                            </td>
+                        {{else}}
+                            <td class="d-none d-sm-table-cell"><b class="price">{{price}}</b> руб</td>
+                        {{/if}}
+                        {{#if in_stock}}
+                            <td class="ml-3">
+                                <button class="buy_button p-2 p-sm-0 pr-2 pl-2" onclick="addToCart('{{id}}')"
+                                        type="submit">КУПИТЬ
+                                </button>
+                            </td>
+                        {{else}}
+                            <td>
+                                <button class="buy_button notinstock p-2 p-sm-0" disabled type="submit">НЕТ В НАЛИЧИИ
+                                </button>
+                            </td>
+                        {{/if}}
+
+                    </tr>
+                {{/each}}
+            </table>
+
+
+        </div>
+    </div>
+    <ul class="nav nav-tabs" id="product_tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#description" role="tab" aria-controls="home"
+               aria-selected="true">Описание</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#seasons" role="tab" aria-controls="profile"
+               aria-selected="false">Время года и суток</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#reviews" role="tab" aria-controls="contact"
+               aria-selected="false" id="ratingsTab">Отзывы</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="product_content">
+        <div class="tab-pane fade show active" id="description" role="tabpanel">
+            <!--{{#each aromat.propsConcat}}-->
+                <!--{{#ifnoteq this.name 'Знак зодиака'}}-->
+                <!--{{#ifnoteq this.name 'Группа'}}-->
+                    <!--{{#ifeq this.tag 'common'}}-->
+                        <!--<div>-->
+                            <!--<div class="prop_name">-->
+                                <!--{{this.name}}-->
+                            <!--</div>-->
+                            <!--<div class="prop_value">-->
+                                <!--{{this.value}}-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--{{/ifeq}}-->
+                <!--{{/ifnoteq}}-->
+                <!--{{/ifnoteq}}-->
+            <!--{{/each}}-->
+            <div>
+                <div class="prop_name">
+                    {{aromat.propsConcat.2.name}}
+                </div>
+                <div class="prop_value">
+                    {{aromat.propsConcat.2.value}}
+                </div>
+            </div>
+            <div>
+                <div class="prop_name">
+                    {{aromat.propsConcat.3.name}}
+                </div>
+                <div class="prop_value">
+                    {{aromat.propsConcat.3.value}}
+                </div>
+            </div>
+            <div>
+                <div class="prop_name">
+                    {{aromat.propsConcat.11.name}}
+                </div>
+                <div class="prop_value">
+                    {{aromat.propsConcat.11.value}}
+                </div>
+            </div>
+            <div>
+                <div class="prop_name">
+                    {{aromat.propsConcat.8.name}}
+                </div>
+                <div class="prop_value">
+                    {{aromat.propsConcat.8.value}}
+                </div>
+            </div>
+            <div>
+                <div class="prop_value">
+                    {{description}}
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="seasons" role="tabpanel">
+            {{#each aromat.propsConcat}}
+                {{#ifeq this.tag 'seasonal'}}
+                    <div>
+                        <div class="prop_name">
+                            {{this.name}}
+                        </div>
+                        <div class="prop_value">
+                            {{this.value}}
+                        </div>
+                    </div>
+                {{/ifeq}}
+            {{/each}}
+        </div>
+        <div class="tab-pane fade" id="reviews" role="tabpanel">
+
+        <form id="sendRatingForm" class="d-flex flex-column align-items-center">
+            {{#if userRating.username}}
+                {{#if userRating.approved}}
+                    <div class="card w-75">
+                        <div class="card-body">
+                            Ваш отзыв
+                            <h6 class="card-title">{{userRating.username}}</h6>
+                            <span>{{userRating.created_at}}</span>
+                            <p class="card-text">{{userRating.comment}}</p>
+                        </div>
+                    </div>
+                {{/if}}
+            {{else}}
+                {{#if isAuthenticated}}
+                    {{#if errorMessages}}
+                        {{#each errorMessages}}
+                            <div class="alert alert-danger" role="alert">{{msg}}</div>
+                        {{/each}}
+                    {{/if}}
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Оценка товару</label>
+                            <select name="rating" class="form-control" id="ratingValue">
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-8">
+                        <label for="exampleFormControlTextarea1">Оставить отзыв о товаре</label>
+                        <textarea class="form-control" name="comment" id="ratingComment" rows="3"></textarea>
+                        <div id='invalidRatingComment' class="invalid-feedback mb-4 ml-5 mr-5"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" value="{{aromat.id}}" id="aromat_page_id">
+                        <button id="sendRatingButton" class="buy_button mt-4 pr-3 pl-3">
+                            Отправить
+                        </button>
+                    </div>
+                </form>
+                {{/if}}
+
+            {{/if}}
+            <div id="ratingSendSuccess" hidden>Отзыв успешно отправлен и будет показан после модерации</div>
+            {{#if ratings}}
+                {{#each ratings}}
+                    <div class="panel panel-default mt-5 mb-5">
+                        <div class="panel-heading ">
+                            <strong>{{user.username}}</strong>
+                            <span class="text-muted"> прокомментировал {{created_at}}</span>
+                        </div>
+                        <div class="panel-body">
+                            <p class="card-text">{{comment}}</p>
+                        </div>
+                    </div>
+                {{/each}}
+            {{else}}
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text text-center">Отзывы отсутствуют</p>
+                        {{#unless isAuthenticated}}
+                            <p class="card-text text-center">
+                                <a href="/login">Авторизируйтесь</a> чтобы оставить первый отзыв!
+                            </p>
+                        {{/unless}}
+                    </div>
+                </div>
+            {{/if}}
+
+        </div>
+    </div>
+    {{#if productsMayLike.length}}
+        <div class="recommendations">
+            <h3 class="heading">ВАМ МОЖЕТ ПОНРАВИТЬСЯ</h3>
+            <hr>
+            <div class="row">
+
+                {{#each productsMayLike }}
+                    {{> productboxTEST isAuthenticated=../isAuthenticated category=this}}
+                {{/each}}
+            </div>
+        </div>
+    {{/if}}
+    {{#if thisCollectionAromats.length}}
+        <div class="this-collection">
+            <h3 class="heading">АРОМАТЫ ИЗ ЭТОЙ КОЛЛЕКЦИИ</h3>
+            <hr>
+            <div class="row">
+                {{#each thisCollectionAromats }}
+                    {{> productboxTEST isAuthenticated=../isAuthenticated category=this}}
+                {{/each}}
+            </div>
+        </div>
+    {{/if}}
+</div>
+
+
+
+{{> layouts/footer }}

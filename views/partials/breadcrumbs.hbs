@@ -1,0 +1,15 @@
+<nav aria-label="breadcrumb d-sm-block">
+    <ol class="breadcrumb justify-content-center justify-content-md-start d-sm-block" id="breadcrumbs">
+        {{#each breadcrumbs}}
+            <li class="breadcrumb-item d-sm-inline-block {{#unless this.url}}active{{/unless}} {{#if this.as_h1}}d-block breadcrumb-h1{{else}}d-none{{/if}}">
+                {{#if this.as_h1}}<h1>{{/if}}
+                {{#if this.url}}
+                    <a href="{{this.url}}">{{this.label}}</a>
+                {{else}}
+                    {{this.label}}
+                {{/if}}
+                {{#if this.as_h1}}</h1>{{/if}}
+            </li>
+        {{/each}}
+    </ol>
+</nav>

@@ -1,0 +1,32 @@
+{{#each this.ratings}}
+
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+            <div class="card-body">
+                <h5 class="card-title">{{username}}</h5>
+                <p class="card-text">{{comment}}</p>
+                <p class="card-text">
+                    <small class="text-muted">{{rating}}</small>
+                </p>
+            </div>
+        </div>
+    </div>
+{{/each}}
+<form action="/add-rating/{{category_id}}" method="post">
+    <!--<div class="form-group">-->
+    <!--<label for="exampleFormControlSelect2">Example multiple select</label>-->
+    <!--<select multiple class="form-control" id="exampleFormControlSelect2">-->
+    <!--<option>1</option>-->
+    <!--<option>2</option>-->
+    <!--<option>3</option>-->
+    <!--<option>4</option>-->
+    <!--<option>5</option>-->
+    <!--</select>-->
+    <!--</div>-->
+    {{>stars}}
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Оставить отзыв о товаре</label>
+        <textarea class="form-control" name="comment" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

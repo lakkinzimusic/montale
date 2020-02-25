@@ -1,0 +1,114 @@
+{{> layouts/head }}
+{{> layouts/header }}
+
+<div class=" container account">
+    <div class="row">
+        <div class="col-sm-3">
+            {{> accountmenu}}
+        </div>
+
+        <div class="col-sm-9">
+
+            <h2>ЗАКАЗЫ</h2>
+            <hr>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Номер заказа</th>
+                    <th scope="col">Время</th>
+                    <th scope="col">Сумма</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each orders}}
+                    <tr>
+                        <th scope="row">#{{pad id 8}}</th>
+                        <td>{{date created_at "DD.MM.YYYY HH:mm:ss"}}</td>
+                        <td>{{total_price}} руб.</td>
+                        <!--<td style="color: {{status.color}}">{{status.status_label}}</td>-->
+                        <td><span  style="background-color: {{status.color}}" class="badge badge-primary">{{status.status_label}}</span></td>
+                        <td class="text-right">
+                            <a href="#" data-toggle="modal" data-target="#orderModal-{{id}}" class="btn btn-dark"><i
+                                    class="fas fa-eye"></i> Просмотр</a>
+                        </td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {{#each orders}}
+        <div class="modal fade" id="orderModal-{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Заказ #{{pad id 8}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Наименование</th>
+                                <th scope="col">Количество</th>
+                                <th scope="col">Стоимость</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#each order_items}}
+                                <tr>
+                                    <td>
+                                        {{#if product.meta_data.aromat_name}}
+                                            {{product.meta_data.aromat_name}}
+                                        {{else}}
+                                            {{product.product_name}}
+                                        {{/if}}
+                                        <br/>
+                                        <small>
+                                            {{product.meta_data.hint}}
+                                        </small>
+                                        {{#if product.meta_data.volume}}
+                                            <div class="cart_product_volume">
+                                                {{product.meta_data.volume}}{{product.meta_data.measure}}
+                                            </div>
+                                        {{/if}}
+                                        {{#if kit.length}}
+                                            <div class="mb-5">
+                                                {{#each kit}}
+                                                    <div class="cart_kit_el">
+                                                        <small>{{category_name}}</small>
+                                                    </div>
+                                                {{/each}}
+                                            </div>
+                                        {{/if}}
+                                    </td>
+                                    <td>
+                                        {{quantity}}
+                                    </td>
+                                    <td>
+                                        {{price_const}}
+                                    </td>
+                                </tr>
+                            {{/each}}
+                            <tr>
+                                <th class="text-right" colspan="3">
+                                    Сумма заказа: {{total_price}} руб.
+                                </th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>
+{{> layouts/footer }}

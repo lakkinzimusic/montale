@@ -1,0 +1,195 @@
+{{> layouts/head }}
+{{> layouts/header }}
+<script src="/js/bootstrap_autocomplete.js" type="text/javascript"></script>
+<script src="/js/form2js.js" type="text/javascript"></script>
+<script src="/js/sdek_calc.js" type="text/javascript"></script>
+<hr class="mb-5">
+<h2 class="product__title text-center mt-5 mb-0">ОПЛАТА И ДОСТАВКА</h2>
+<hr>
+<div class="container">
+    <div class="row">
+
+        <div class="d-flex flex-column align-items-center">
+            <!--<div class="row">-->
+            <!--<div class="col">-->
+            <!--<div class="sdekicon">-->
+            <!--<div>-->
+            <!--<i class="fas fa-shopping-bag"></i>-->
+            <!--</div>-->
+            <!--<div>-->
+            <!--<small>Минимальная сумма заказа</small>-->
+            <!--<br/>-->
+            <!--<b>2000 руб.</b>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col">-->
+            <!--<div class="sdekicon">-->
+            <!--<div>-->
+            <!--<i class="fas fa-truck"></i>-->
+            <!--</div>-->
+            <!--<div>-->
+            <!--<small>Доставка свыше <b>6000 руб.</b></small>-->
+            <!--<br/>-->
+            <!--<b>Бесплатно</b>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <div class="row delivheader mb-2">
+
+                <div class="col-sm-3 nopadding delivinfo black-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Стоимость
+                                и сроки
+                                доставки</h5>
+                            <p class="card-text">*Точное время и стоимость доставки можно узнать при оформлении</p>
+                        </div>
+                    </div>
+                    <div class="dark-triangle"></div>
+                </div>
+
+                <div class="col-sm-3 nopadding delivinfo white-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Москва <br/>и Московская область</h5>
+                            <p class="card-text">Сроки доставки: 1-2 дня</p>
+                            <p class="card-text">Курьер: <b>от 300</b> руб.</p>
+                            <p class="card-text">Пункт выдачи: <b>от 150</b> руб.</p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    *Стоимость может незначительно меняться в зависимости от количества заказанной
+                                    продукции.
+                                </small>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 nopadding delivinfo white-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Санкт-Петербург <br/>и Ленинградская область</h5>
+                            <p class="card-text">Сроки доставки: 1-2 дня</p>
+                            <p class="card-text">Курьер: <b>от 250</b> руб.</p>
+                            <p class="card-text">Пункт выдачи: <b>от 150</b> руб.</p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    *Стоимость может незначительно меняться в зависимости от количества заказанной
+                                    продукции.
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 nopadding delivinfo white-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Другие города <br/>и регионы</h5>
+                            <p class="card-text">
+                                Доставка осуществляется службой доставки <b>СДЭК</b>.
+                            </p>
+                            <p class="card-text">
+                                Расчитать стоимость можно ниже на этой странице
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-0 pt-0 mb-5">
+                <p class="row mt-0 pt-0 mb-5">
+                </p>
+            </div>
+            <div id="sdekcalc">
+                <form action="" id="sdekform" method="GET">
+                    <small>Начните вводить название пункта и выберите его из выпадающего списка.</small>
+                    <input type="hidden" name="version" value="1.0"/>
+                    <input type="hidden" name="dateExecute" value="{{date null "YYYY-MM-DD"}}"/>
+                    <input type="hidden" name="tariffId" value="11"/>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="city_input">Откуда *</label>
+                            <input class="form-control" type="text" id="city_input" name="city"/>
+                            <input type="hidden" name="senderCityId" id="city_input_id" value=""/>
+                        </div>
+
+                        <div class="col">
+                            <label for="city2_input">Куда *</label>
+                            <input class="form-control" type="text" id="city2_input" name="city2"/>
+                            <input type="hidden" name="receiverCityId" id="city2_input_id" value=""/>
+                        </div>
+                    </div>
+
+                    <h5 class="mt-4 mb-0">Параметры мест</h5>
+                    <hr/>
+                    <small>Вес (в кг)*, Габариты ДхШхВ (в см)**</small>
+                    <div class="row">
+                        <div class="col-12 col-md-8">
+                            <div id="sdekItems">
+                                <div class="row" id="sdekItemTpl">
+                                    <div class="col-12">
+                                        <div class="small_input">
+                                            <input class="form-control" value="0.3" type="text" placeholder="Вес"
+                                                   name="goods[0].weight"/>
+                                        </div>
+                                        ,
+                                        <div class="small_input">
+                                            <input class="form-control" value="10" type="text" placeholder="Длина"
+                                                   name="goods[0].length"/>
+                                        </div>
+                                        х
+                                        <div class="small_input">
+                                            <input class="form-control" value="7" type="text" placeholder="Ширина"
+                                                   name="goods[0].width"/>
+                                        </div>
+                                        х
+                                        <div class="small_input">
+                                            <input class="form-control" value="5" type="text" placeholder="Высота"
+                                                   name="goods[0].height"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="col-12 mt-3 mt-lg-0 text-right">
+                                <a href="#" class="btn btn-sdek" id="sdekcalculate">
+                                    Посчитать
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <a href="#" class="mt-2" id="sdekAddItem"><i class="fas fa-plus"></i> Добавить место</a>
+                    </div>
+                    <hr/>
+                    <div id="sdekresult">
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<hr class="mb-5">
+<h2 class="product__title text-center mt-5 mb-0">СПОСОБЫ ОПЛАТЫ</h2>
+<hr>
+<div class="container">
+    Оплата заказа осуществляется при получении заказа в пункте самовывоза или наличными курьеру.
+    <br/>
+    Оплата на сайте производится банковскими картами или электронными деньгами.
+    <br/>
+    <div class="text-center mt-5">
+        <a href="/" class="btn btn-outline-dark d-inline-block btn-largest">ПРОДОЛЖИТЬ ПОКУПКИ</a>
+    </div>
+</div>
+
+
+{{> layouts/footer}}

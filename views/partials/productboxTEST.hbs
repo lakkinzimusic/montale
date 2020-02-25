@@ -1,0 +1,104 @@
+<div class="col-sm-{{#if col_width}}{{col_width}}{{else}}4{{/if}}">
+    <div class="card product flex-column align-items-stretch product_box">
+        <div class="card-header">
+
+            {{#if category.isFavourite}}
+                <img id="product{{category.id}}"
+
+                    {{#if isAuthenticated}}
+                     onclick="addFavourite('{{category.id}}')"
+                    {{else}}
+                     data-toggle="modal" data-target="#exampleModalCenter"
+                    {{/if}}
+                     class="heart heart{{category.id}}" src="../imgs/heart-black.png"
+                     alt="">
+                <!--href="/add-favorite/{{id}}"-->
+            {{else}}
+                <img id="product{{category.id}}"
+                    {{#if isAuthenticated}}
+                     onclick="addFavourite('{{category.id}}')"
+                    {{else}}
+                     data-toggle="modal" data-target="#exampleModalCenter"
+                    {{/if}}
+                     class="heart heart{{category.id}}" src="../imgs/heart-white.png"
+                     alt="">
+            {{/if}}
+            <div class="img-wrap">
+                <a href="/perfume/{{category.slug}}">
+                    <!--<a href="aromatpage">-->
+
+
+                    <img class="img-thumbnail" src="/{{ category.image_url }}">
+
+                </a>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title">{{category.category_name}} </h5>
+            <p class="card-text"> Парфюмерная вода-спрей </p>
+            <div class="accordion" id="priceCollapse">
+                {{#each category.products}}
+                    <div {{#if @index}}style="display: none"{{/if}} id="priceblock-{{this.id}}"
+                         class="price collapse show" aria-labelledby="collapse20"
+                         data-parent="#priceCollapse">
+                        <p class="card-text">
+                            {{#if this.promoPrice}}
+                                <span>{{this.promoPrice}} руб</span>
+                            {{else}}
+                                {{ this.price }} руб
+                            {{/if}}
+                        </p>
+
+                    </div>
+                {{/each}}
+
+
+
+                <!--<p class="card-text">{{ this.[0].promoPrice }} руб АКЦИЯ</p>-->
+
+                <div class="milliliters d-flex justify-content-around">
+                    {{#each category.products}}
+                        <button type="button" id="button{{this.id}}ml" data-product="{{this.id}}"
+                                class="btn show btn-outline-dark priceButton priceButtonBox {{#unless
+                                        @index}}active{{/unless}}"
+                                aria-expanded="true">{{this.meta_data.volume}}{{this.meta_data.measure}}
+                        </button>
+                    {{/each}}
+                </div>
+
+                <!--<p class="more"><a href="#" class="button">Add to CartModel</a></p>-->
+
+            </div>
+            <div class="card-footer">
+                {{#each category.products}}
+
+                    {{#if this.in_stock}}
+                        <button
+                                {{#if @index}}style="display: none"{{/if}}
+                                class="buy_button"
+                                id="buyButtion-{{this.id}}"
+                                data-product="{{this.id}}"
+                                onclick="addToCart('{{this.id}}')"
+                                type="submit">
+                            КУПИТЬ
+                        </button>
+                    {{/if}}
+                    {{#unless this.in_stock}}
+                        <button
+                                {{#if @index}}style="display: none"{{/if}}
+                                class="buy_button"
+                                disabled
+                                id="buyButtion-{{this.id}}"
+                                data-product="{{this.id}}"
+                                onclick="addToCart('{{this.id}}')"
+                                type="submit">
+                            Нет в наличии
+                        </button>
+                        <div>{{this.in_stock}}</div>
+                    {{/unless}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+
+#newProducts {
+  .slick-arrow {
+    position: absolute;
+    top: 170px;
+    z-index: 3;
+    width: 3vw;
+    height: 3vw;
+    padding: 0.7vw;
+    background: #ffffffb5;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+      background: #eaeaea8f;
+    }
+
+    &.slick-next {
+      right: 10px;
+    }
+
+    &.slick-prev {
+      left: 10px;
+    }
+
+    i {
+      font-size: 3rem;
+    }
+  }
+}
+
+#instagram_pics {
+  .instagram_pic {
+    padding: 10px;
+    img {
+      width: 100%;
+    }
+  }
+  .slick-arrow {
+    position: absolute;
+    top: 100px;
+    z-index: 3;
+    width: 3vw;
+    height: 3vw;
+    padding: 0.7vw;
+    background: #ffffffb5;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+      background: #eaeaea8f;
+    }
+
+    &.slick-next {
+      right: 10px;
+    }
+
+    &.slick-prev {
+      left: 12px;
+    }
+
+    i {
+      font-size: 3rem;
+    }
+  }
+}
+

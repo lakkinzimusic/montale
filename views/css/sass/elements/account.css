@@ -1,0 +1,17 @@
+.account h2 {
+  text-align: center;
+  font: 18pt/20pt 'Noto Serif', sans-serif;
+  margin-top: 3rem; }
+
+.account .input {
+  margin-top: 20px; }
+
+.account a:not(.btn) {
+  text-decoration: none;
+  font: 13pt/14pt 'Noto Serif', sans-serif;
+  color: black; }
+
+.account li {
+  margin-top: 40px; }
+
+/*# sourceMappingURL=account.css.map */

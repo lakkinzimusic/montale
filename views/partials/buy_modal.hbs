@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-md-5 divide-right">
+        <div class="row h-100">
+            <div class="col-6">
+                <div class="product-image-wrapper">
+                    <img src="/{{product.imageURL}}" alt="" class="product-image">
+                </div>
+            </div>
+            <div class="col-6 cart-content d-flex">
+                <h6 class="modal-heading name">{{product.product_name}}</h6>
+                <div>
+                    <p>Стоимость:
+                        <b>
+                            {{#if product.promoPrice}}
+                                <span style="color: red">{{product.promoPrice}}</span>
+                            {{else}}
+                                {{product.price}}
+                            {{/if}}
+                            рублей.
+                        </b>
+                    </p>
+                    <!--<p>Объем: <b>!СДЕЛАТЬ! мл.</b></p>-->
+
+                    {{#ifeq product.category.category_type 'kit'}}
+                        <b>Ароматы:</b>
+                        <ul class="list-group" id="cart_kit_list">
+
+                            {{#each cart_item.kit}}
+                                <li class="list-group-item"><i class="fas fa-caret-right"></i>  {{this.category_name}}
+                                </li>
+                            {{/each}}
+                        </ul>
+                    {{/ifeq}}
+                    <p><b>{{product.additional_property}}</b></p>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7 d-flex">
+        <div class="cart-content d-flex">
+            <h6 class="modal-heading">В Вашей корзине {{pluralize cart.totalCount one='1 товар' 2='2 товара'
+                                                                  few='# товара' many='# товаров'}} </h6>
+            <p>
+                <strong>На сумму:</strong> {{cart.totalPrice}} рублей
+            </p>
+
+
+            <div class="cart-content-btn">
+                <a href="#" class="btn btn-white btn-lg ml-xs-3 mb-xs-2" data-dismiss="modal">Продолжить покупки</a>
+                <a href="/cart" class="btn btn-primary btn-lg ml-xs-3 mb-xs-2">Перейти к оформлению</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,27 @@
+{
+  "name": "montale-admin",
+  "version": "1.0.0",
+  "description": "Montale Russia admin panel",
+  "author": "Denis Volin",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^12.3.1",
+    "@ckeditor/ckeditor5-vue": "^1.0.0-beta.2",
+    "@nuxtjs/auth": "^4.8.1",
+    "@nuxtjs/axios": "^5.5.4",
+    "moment": "^2.24.0",
+    "nuxt": "^2.0.0",
+    "prismjs": "^1.17.1",
+    "vue-prism-editor": "^0.3.0",
+    "vuetify-confirm": "^1.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "@nuxtjs/vuetify": "^1.0.0"
+  }
+}

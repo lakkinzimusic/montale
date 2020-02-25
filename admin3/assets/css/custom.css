@@ -1,0 +1,61 @@
+.fw-bold {
+  font-weight: bold !important;
+}
+
+.fw-light {
+  font-weight: 100 !important;
+}
+
+.fw-regular {
+  font-weight: normal !important;
+}
+
+.letter-space-default {
+  letter-spacing: normal !important;
+}
+
+.popout {
+  margin: -12px;
+}
+
+.w-10 {
+  width: 10%;
+}
+
+.w-10.popout {
+  width: calc(10% + 24px);
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.w-25.popout {
+  width: calc(25% + 24px);
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-50.popout {
+  width: calc(50% + 24px);
+}
+
+.w-75 {
+  width: 75%;
+}
+
+.w-75.popout {
+  width: calc(75% + 24px);
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-100.popout {
+  width: calc(100% + 24px);
+}
+
+/*# sourceMappingURL=custom.css.map */

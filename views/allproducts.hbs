@@ -1,0 +1,22 @@
+{{> layouts/head }}
+{{> layouts/header }}
+<div class="background-image d-none d-md-block">
+
+</div>
+
+<div class="container main">
+
+    {{> bodyheader}}
+
+
+
+    <div class="row">
+
+        {{#each products  }}
+
+            {{> productbox}}
+        {{/each}}
+    </div>
+
+</div>
+{{> layouts/footer }}

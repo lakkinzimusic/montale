@@ -1,0 +1,277 @@
+{{> layouts/head }}
+{{> layouts/header }}
+<div class="container cart mt-5" id="cart">
+
+    <div class="row mt-5">
+
+
+        <div class="col-sm-8">
+
+
+            <h2>КОРЗИНА</h2>
+            <hr class="mb-5">
+            {{#each cart.cart_items }}
+
+                <div class="row no-gutters cart_item mb-3" data-item="{{this.id}}">
+                    <div class="col-4">
+                        <div class="image-wrapper">
+                            <a href="/perfume/{{this.product.products_category.category.slug}}">
+                                <img src="/{{this.product.imageURL}}" class="card-img" alt="...">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body py-0">
+                            <div class="cart_product_price float-right">
+                                {{#if this.promoPrice}}
+                                    <b style="color: red">{{this.promoPrice}} руб.</b>
+                                {{else}}
+                                    <b>{{this.product.price}}</b> руб.
+                                {{/if}}
+                            </div>
+                            <h5 class="card-title product-name">
+                                {{#if this.product.meta_data.aromat_name}}
+                                    {{this.product.meta_data.aromat_name}}
+                                {{else}}
+                                    {{this.product.product_name}}
+                                {{/if}}
+                            </h5>
+                            <div>
+                                <p class="cart_product_hint">
+                                    {{this.product.meta_data.hint}}
+                                </p>
+                                {{#if this.product.meta_data.volume}}
+                                    <div class="cart_product_volume">
+                                        {{this.product.meta_data.volume}}{{this.product.meta_data.measure}}
+                                    </div>
+                                {{/if}}
+                                {{#if this.kit.length}}
+                                    <div class="mb-5">
+                                        {{#each this.kit}}
+                                            <div class="cart_kit_el">
+                                                <small>{{this.category_name}}</small>
+                                            </div>
+                                        {{/each}}
+                                    </div>
+                                {{/if}}
+
+                            </div>
+                            <p class="card-text">
+                                <button type="button"
+                                        onclick="changeQuantityThisProduct('{{id}}', 'inc')"
+                                        class="btn quantity-button"><i class="fas fa-plus"></i>
+                                </button>
+                                <span id='quantityProductCart{{id}}' class="quantity-num"
+                                      data-quantity="{{quantity}}">{{quantity}}</span>
+                                <button type="button"
+                                        onclick="minusProduct('{{id}}', 'dec')"
+                                        class="btn quantity-button"
+
+                                ><i class="fas fa-minus"></i>
+                                </button>
+                            </p>
+
+                            <div class="modal fade" id="minusLastProduct{{id}}" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            Вы уверены, что хотете удалить товар?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                    onclick="changeQuantityThisProduct('{{id}}', 'dec')"
+                                            >Да
+                                            </button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Нет
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-5"/>
+            {{/each}}
+            <div class="d-flex justify-content-center mb-5">
+                <a href="/" class="btn-largest btn btn-outline-dark">Продолжить покупки</a>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+
+            <h2>ВАШ ЗАКАЗ</h2>
+            <div id='invalidOrder-payment_method' class="invalid-feedback"></div>
+            <div id='invalidOrder-user_phone' class="invalid-feedback"></div>
+            <div id='invalidOrder-delivery_method' class="invalid-feedback"></div>
+            <hr class="mb-5">
+            <form action="/cart/order-registration" method="POST" id="createOrderForm">
+                <div class="d-flex justify-content-between">
+                    <p>Товаров</p>
+                    <p id="countProducts">{{cart.totalCount}}</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p>На сумму</p>
+                    <p id="totalProductPrice"><span>{{cart.totalPrice}}</span> руб.</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p>Итого с промокодом</p>
+                    <p id="totalPrice"><span>
+                        {{#if cart.promocodePrice}}
+                            {{cart.promocodePrice}}
+                        {{else}}
+                            {{cart.totalPrice}}
+                        {{/if}}
+                    </span> руб.</p>
+                    <input type="hidden" name="promocodePrice" value="
+       {{#if cart.promocodePrice}}
+                        {{cart.promocodePrice}}
+                    {{else}}
+                        {{cart.totalPrice}}
+                    {{/if}}">
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="text" id='inputPromo' class="form-control"
+                        {{#if cart.promocodePrice}}
+                           placeholder="Скидка уже применена"
+                           readonly
+                        {{else}}
+                            {{#if isAuthenticated}}
+                           placeholder="Промокод"
+                            {{else}}
+                           placeholder="Промокод (необходима авторизация)" data-toggle="modal"
+                           data-target="#exampleModalCenter" readonly
+                            {{/if}}
+                        {{/if}}
+                           aria-label="Recipient's username"
+                           aria-describedby="basic-addon2">
+                    <div id='invalidPromo' class="invalid-feedback"></div>
+                    {{#unless cart.promocodePrice}}
+                        {{#if isAuthenticated}}
+                            <div class="input-group-append">
+                                <button id='sendPromo' class="btn btn-muted" type="button">Применить</button>
+                            </div>
+                        {{/if}}
+                    {{/unless}}
+                </div>
+
+                <input type="hidden" name="totalPrice" id="inputPromo1" value="{{ cart.totalPrice}}">
+                <button class="btn btn-dark btn-block">Оформить заказ</button>
+
+                <div id="cart_accordion" class="mt-5">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0" data-toggle="collapse" data-target="#collapseDelivery">
+                                Способ доставки <i class="fas fa-chevron-down"></i>
+                            </h5>
+                        </div>
+
+                        <div id="collapseDelivery" class="collapse" aria-labelledby="headingOne"
+                             data-parent="#cart_accordion">
+                            <div class="card-body">
+                                {{#each deliveryMethods}}
+                                    <div class="form-check">
+                                        <input class="form-check-input delivery_method_radio" type="radio"
+                                               name="delivery_method"
+                                               id="delivery_method-{{id}}" value="{{id}}" checked>
+                                        <label class="form-check-label" for="delivery_method-{{id}}">
+                                            {{label}}
+                                        </label>
+                                    </div>
+                                {{/each}}
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0" data-toggle="collapse" id="collapsePaymentWrap"
+                                data-target="#collapsePayment">
+                                Способ оплаты <i class="fas fa-chevron-down"></i>
+                            </h5>
+                        </div>
+
+                        <div id="collapsePayment" class="collapse" aria-labelledby="headingOne"
+                             data-parent="#cart_accordion">
+                            {{#each defaultPaymentMethods }}
+
+                                <div class="form-check">
+
+                                    <input class="form-check-input payment_method_radio" type="radio"
+                                           name="payment_method"
+                                           id="payment_method-{{id}}" value="{{id}}" checked>
+                                    <label class="form-check-label" for="payment_method-{{id}}">
+                                        {{label}}
+                                    </label>
+                                </div>
+                            {{/each}}
+                        </div>
+
+                    </div>
+
+                    <!--<div class="card">-->
+                    <!--<div class="card-header" id="collapseDeliveryAdressWrap">-->
+                    <!--<h5 class="mb-0" data-toggle="collapse" data-target="#collapseDeliveryAdressW">-->
+                    <!--Адрес доставки <i class="fas fa-chevron-down"></i>-->
+                    <!--</h5>-->
+                    <!--</div>-->
+
+                    <!--<div id="collapseDeliveryAdress" class="collapse" aria-labelledby="headingOne"-->
+                    <!--data-parent="#cart_accordion">-->
+                    <!--<select class="form-control form-control-lg" name="delivery_city">-->
+                    <!--<option selected value="Москва">Москва</option>-->
+                    <!--<option value="Санкт-Петербург">Санкт-Петербург</option>-->
+                    <!--</select>-->
+                    <!--<label class="form-check-label" for="fullname">Город доставки</label>-->
+                    <!--<input type="text" name="delivery_address">-->
+                    <!--<label class="form-check-label" for="fullname">Адрес доставки</label>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="card">-->
+
+                    <!--<div class="card-header" id="userDataWrap">-->
+                    <!--<h5 class="mb-0" data-toggle="collapse" data-target="#userData">-->
+                    <!--Данные покупателя <i class="fas fa-chevron-down"></i>-->
+                    <!--</h5>-->
+                    <!--</div>-->
+
+                    <!--<div id="userData" class="collapse" aria-labelledby="headingOne"-->
+                    <!--data-parent="#cart_accordion">-->
+                    <!--<div class="card-body">-->
+                        <!--<input type="text" name="user_fullname" {{#if isAuthenticated}}-->
+                        <!--value="{{userFullname}}" {{/if}}>-->
+                    <!--<label class="form-check-label" for="fullname">Имя пользователя</label>-->
+                        <!--<input type="text" name="user_phone" {{#if isAuthenticated}}-->
+                        <!--value="{{userPhone}}" {{/if}} >-->
+                    <!--<label class="form-check-label" for="phone">Телефон</label>-->
+
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $('#cart_accordion h5').click(function (e) {
+        $('#cart_accordion h5 i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        let target = $(this).parent().next();
+
+        if (!target.hasClass('show')) {
+            $(this).find('i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+        }
+    });
+</script>
+
+{{> layouts/footer }}

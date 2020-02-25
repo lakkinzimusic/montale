@@ -1,0 +1,89 @@
+@charset "UTF-8";
+/*╨д╨Ш╨Ы╨м╨в╨а╨л ╨Ш ╨Я╨Ю╨Ь╨Ю╨й╨м ╨Т ╨Э╨Р╨Т╨Ш╨У╨Р╨ж╨Ш╨Ш*/
+#relative {
+  position: relative; }
+
+.bodyheader {
+  padding: 2rem 0 0 0; }
+
+.bodyheader * {
+  text-decoration: none;
+  color: black;
+  font: 12pt/14pt "Noto Serif", sans-serif; }
+
+.bodyheader .dropdown-toggle {
+  font: 12pt/14pt "Noto Serif", sans-serif;
+  border: none;
+  padding: 0; }
+
+#collapseTwo {
+  position: absolute;
+  z-index: 1000;
+  margin: 0 auto;
+  width: 1920px;
+  height: 513px;
+  background-image: url("../imgs/bg-filters.png");
+  /*background: white;*/
+  opacity: 1.0;
+  left: 0;
+  right: 0; }
+
+#collapseTwo > form > div.row {
+  margin-top: 20px;
+  height: 430px; }
+
+#collapseTwo .filter-list {
+  height: 60%; }
+
+#collapseTwo .row .col-sm-3 {
+  height: 430px; }
+
+#collapseTwo .submit-filter {
+  border-top: 1px solid black;
+  text-align: center;
+  padding-top: 10px;
+  z-index: 1100000; }
+
+#collapseTwo .submit-filter input {
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 0;
+  z-index: 1100000; }
+
+#collapseTwo .submit-filter .submit {
+  background: black;
+  color: white;
+  z-index: 1100000; }
+
+#collapseTwo .submit-filter .close {
+  background: white;
+  color: black;
+  border: 1px solid black; }
+
+#orders {
+  position: relative; }
+
+#collapseThree {
+  position: absolute;
+  z-index: 100000;
+  width: 259px;
+  height: 220px;
+  background-image: url("../imgs/bg-sort.png");
+  /*background: white;*/
+  opacity: 1.0;
+  left: -100px;
+  right: 0;
+  padding: 2px; }
+
+#collapseThree form {
+  margin-top: 50px;
+  margin-left: 20px; }
+
+#collapseThree input {
+  margin-left: 10px; }
+
+#collapseThree label {
+  margin-left: 25px;
+  margin-bottom: 10px; }
+
+/*# sourceMappingURL=filters.css.map */

@@ -1,0 +1,105 @@
+{{> layouts/head }}
+{{> layouts/header }}
+<div class="container" id="cart">
+
+    <div class="row">
+        <div class="col">
+            <h2>Ваш заказ успешно оформлен!</h2>
+            <div class="card">
+                <div class="card-header">Сумма заказа</div>
+                <div class="card-body">
+                    <p class="card-text">{{order.total_price}} руб</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">Ваш email</div>
+                <div class="card-body">
+                    <p class="card-text">{{order.email}}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">Метод доставки</div>
+                <div class="card-body">
+                    <p class="card-text">{{order.delivery_method}}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">Метод оплаты</div>
+                <div class="card-body">
+                    <p class="card-text">{{order.payment_method}}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">Адрес доставки</div>
+                <div class="card-body">
+                    <p class="card-text"> {{order.delivery_city}} {{order.delivery_address}}</p>
+                </div>
+            </div>
+            {{#if order.comment}}
+                <div class="card">
+                    <div class="card-header">Комментарий к заказу</div>
+                    <div class="card-body">
+                        <p class="card-text">{{order.comment}}</p>
+                    </div>
+                </div>
+            {{/if}}
+
+        </div>
+        <div class="col-sm-4">
+            <h2>Товары</h2>
+            {{#each order_products }}
+                <div class="row no-gutters cart_item small mb-3" data-item="{{this.id}}">
+                    <div class="col-md-3">
+                        <div class="image-wrapper">
+                            <img src="/{{imageURL}}" class="card-img" alt="...">
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body py-0">
+                            <h5 class="card-title product-name">
+                                {{#if meta_data.aromat_name}}
+                                    {{meta_data.aromat_name}}
+                                {{else}}
+                                    {{product_name}}
+                                {{/if}}
+                            </h5>
+                            <div>
+                                <div class="row">
+                                    <div class="col">
+                                        {{#if kit.length}}
+                                            <div>
+                                                {{#each kit}}
+                                                    <div class="cart_kit_el">
+                                                        <small>{{this.category_name}}</small>
+                                                    </div>
+                                                {{/each}}
+                                            </div>
+                                        {{/if}}
+
+                                        <div class="cart_product_price text-right">
+                                            <p><b>{{orderProductPrice}}</b> руб.</p>
+                                            <span><b>x {{this.quantity}}</b></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+
+    </div>
+    <a href="/">
+        <button>ПРОДОЛЖИТЬ ПОКУПКИ</button>
+    </a>
+</div>
+<script>
+
+</script>
+
+{{> layouts/footer }}

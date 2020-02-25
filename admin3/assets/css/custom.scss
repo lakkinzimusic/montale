@@ -1,0 +1,34 @@
+.fw-bold{
+  font-weight: bold!important;
+}
+
+.fw-light{
+  font-weight: 100!important;
+}
+
+.fw-regular{
+ font-weight: normal!important;
+}
+
+.letter-space-default{
+  letter-spacing: normal!important;
+}
+
+$container-gap: 12px;
+
+.popout{
+  margin: -$container-gap;
+}
+
+$sizes: 10 25 50 75 100;
+@each $size in $sizes {
+  $percent: #{$size} + "%";
+  .w-#{$size}{
+    width: #{$size} + "%";
+  }
+  .w-#{$size}.popout{
+    width: calc(#{$percent} + #{$container-gap*2});
+  }
+}
+
+

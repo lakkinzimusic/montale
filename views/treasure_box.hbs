@@ -1,0 +1,80 @@
+{{> layouts/head }}
+{{> layouts/header }}
+
+
+
+
+
+{{sample_kit.['Набор мини']}}
+
+
+{{#each sample_kit}}
+    <div class="container">
+        <div class="row">
+
+
+            <div class=" col-sm-4 image-wrapper">
+                <img src="{{image_url}}" alt="">
+            </div>
+
+
+            <div class="col-sm-4 ">
+                <img src="{{@key}}" alt="">
+
+                <p>{{description}}</p>
+
+                {{id}}
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                    <option selected>Choose...</option>
+                    {{#each products}}
+                        <option value={{id}}>{{product_name}}</option>
+                    {{/each}}
+                </select>
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                    <option selected>Choose...</option>
+                    {{#each products}}
+                        <option value={{id}}>{{product_name}}</option>
+                    {{/each}}
+                </select>
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                    <option selected>Choose...</option>
+                    {{#each products}}
+                        <option value={{id}}>{{product_name}}</option>
+                    {{/each}}
+                </select>
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                    <option selected>Choose...</option>
+                    {{#each products}}
+                        <option value={{id}}>{{product_name}}</option>
+                    {{/each}}
+                </select>
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                    <option selected>Choose...</option>
+                    {{#each products}}
+                        <option value={{id}}>{{product_name}}</option>
+                    {{/each}}
+                </select>
+
+            </div>
+
+
+            <div class=" col-sm-4">
+                <h2 class="prodcut_name">{{@key}}</h2>
+
+                <table class="table">
+                    <tr>
+                        <td>{{product_name}}</td>
+                        <td>{{price}} руб</td>
+                        <td>
+                            <button class="buy_button" onclick="addToCart('{{id}}')" type="submit">КУПИТЬ
+                            </button>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+{{/each}}
+{{> layouts/footer }}

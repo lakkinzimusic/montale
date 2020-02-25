@@ -1,0 +1,28 @@
+{{> layouts/head }}
+{{> layouts/header }}
+
+<div class=" container account">
+    <div class="row">
+        <div class="col-sm-3">
+            {{> accountmenu}}
+        </div>
+
+        <div class="col-sm-9">
+
+            <h2>Избранное </h2>
+            <hr>
+            <div class="d-flex justify-content-between">
+                <p>У Вас {{pluralize categories.length one='1 сохранённый аромат' 2='2 сохранённых аромата' few='# сохранённых аромата' many='# сохранённых ароматов'}}</p>
+            </div>
+            <div class="row">
+                {{#each categories}}
+                    {{> productboxTEST isAuthenticated=../isAuthenticated category=this}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+    <!--<h6 class="modal-heading">В Вашей корзине {{pluralize categories.length one='1 товар' 2='2 товара' few='# товара' many='# товаров'}} </h6>-->
+</div>
+
+{{> layouts/footer }}

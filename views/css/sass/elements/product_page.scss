@@ -1,0 +1,125 @@
+#product_tabs {
+  border: none;
+  margin-top: 25px;
+  a {
+    border: none!important;
+    text-transform: uppercase;
+    font-size: 2.1rem;
+  }
+  a:not(.active){
+    color:#b9b9b9;
+  }
+  > li{
+    padding:0 40px;
+    position:relative;
+  }
+  > li:not(:last-child):after{
+    content:"/";
+    position:absolute;
+    top:0;
+    right:-5px
+  }
+  > li:first-child{
+    padding-left:0;
+  }
+}
+
+#product_content {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  .prop_name {
+    font-family: $main-font;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    line-height: 1.2rem;
+  }
+  .prop_value {
+    margin-bottom: 15px;
+  }
+}
+
+#product_page{
+  padding-top: 35px;
+  h2{
+    margin-bottom: 0;
+  }
+  h3{
+    font-family: $main-font;
+    text-align: center;
+    font-size: 3rem;
+  }
+  .product_sex{
+    color: $text-muted;
+    font-family: $second-font;
+  }
+  .image-wrapper {
+    position: relative;
+    z-index:2;
+    &:after {
+      content: "";
+      display: inline-block;
+      width: 120px;
+      height: 30px;
+      border-radius: 100%;
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      z-index:1;
+      box-shadow: 0px 4px 12px 10px rgba(0, 0, 0, 0.65);
+    }
+    img{
+      position:relative;
+      z-index:2;
+    }
+  }
+  #products_inside tr:first-child td {
+    border-top: none;
+  }
+
+  #products_inside td {
+    vertical-align: middle;
+    font-family: $second-font;
+  }
+  b.price {
+    font-size: 2rem;
+  }
+  .buy_button{
+    font-family: $second-font;
+    &.notinstock{
+      opacity: 0.7;
+      cursor: not-allowed;
+      &:hover{
+        color:#fff;
+      }
+    }
+  }
+
+
+  #product_rating_stars i {
+    font-size: 2.5rem;
+  }
+
+  #product_rating_text {
+    font-family: $second-font;
+    color:#000;
+    border-bottom: dotted 1px;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+}
+
+.this-collection, .recommendations{
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 898px){
+  #product_tabs li {
+    padding-left:0;
+    &:after {
+      content: none!important;
+    }
+  }
+}

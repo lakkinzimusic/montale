@@ -1,0 +1,29 @@
+.modal-login-header {
+  margin: 20px auto;
+  padding: 0; }
+
+.modal-login-body .form-signin {
+  text-align: center; }
+
+.modal-login-body input, .modal-login-body button {
+  margin: 20px auto;
+  width: 80%; }
+
+.modal-login-body small {
+  margin: 20px auto;
+  width: 80%;
+  text-align: right; }
+
+/*.modal-login-body .form-check{*/
+/*float: left;*/
+/*margin-left: 48px;*/
+/*}*/
+.modal-login-body .btn {
+  background: black;
+  border-radius: 0;
+  border: none;
+  color: white;
+  padding: 2px 0 2px 0;
+  font: 12pt/14pt 'Noto Serif', sans-serif; }
+
+/*# sourceMappingURL=modal_login.css.map */

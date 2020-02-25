@@ -1,0 +1,74 @@
+<div id='relative' class="row bodyheader">
+    <div class="col-sm-7 ">
+        {{> breadcrumbs}}
+    </div>
+
+    <div class="col-sm-5 btn-group d-flex justify-content-center justify-content-md-end accordion"
+         id="accordionFilters">
+        <ul class="d-flex justify-content-around">
+            <li class="nav-item collections">
+                <a class="nav-link drop_down_collections-link" href="#" data-menu="#drop_down_collections">Коллекции</a>
+            </li>
+            <li class="nav-item filters">
+                <a class="nav-link drop_down_filters_link" href="#" data-menu="#drop_down_filters">Фильтры</a>
+            </li>
+            <li class="nav-item sort">
+                <a class="nav-link drop_down_sort_link" href="#" data-menu="#drop_down_sort">Сортировка</a>
+            </li>
+
+
+        </ul>
+
+    </div>
+
+</div>
+
+
+<div id="drop_down_collections_container">
+    <div class="drop_down filters-group" id="drop_down_collections">
+        {{> drop_down_collections}}
+    </div>
+</div>
+<div id="drop_down_filters_container">
+    <div class="drop_down filters-group" id="drop_down_filters">
+        {{> drop_down_filters}}
+    </div>
+</div>
+<div id="drop_down_sort_container">
+    <div class="drop_down filters-group" id="drop_down_sort">
+        {{> drop_down_sort}}
+    </div>
+</div>
+
+
+<hr>
+
+<!--OLD OLD OLD-->
+
+<!--<div id="dropdown">-->
+<!--<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--Коллекции-->
+<!--</a>-->
+<!--<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+<!---->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="dropdown">-->
+<!--<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--Фильтры-->
+<!--</a>-->
+
+<!--<div class="dropdown-menu">-->
+<!---->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div id="dropdown">-->
+<!--<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--Сортировка-->
+<!--</a>-->
+<!--<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+<!---->
+<!--</div>-->
+<!--</div>-->

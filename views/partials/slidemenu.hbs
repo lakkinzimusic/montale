@@ -1,0 +1,49 @@
+<div class="position-relative">
+    <div id="slidemenu">
+        <ul class="col-sm-12 nav justify-content-around align-items-left flex-column flex-md-row m-sm-0 px-5">
+            <li class="nav-item">
+                <a class="nav-link" href="/new-products">НОВИНКИ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/bestsellers">БЕСТСЕЛЛЕРЫ</a>
+            </li>
+
+            <li class="nav-item collections">
+                <a class="nav-link megamenu-link" href="#" data-menu="#megamenu_collections">КОЛЛЕКЦИИ</a>
+                <ul class="collection-list-text">
+                    {{#each collections }}
+                        <li class="nav-item">
+                            <a href="/collection/{{slug}}">
+                                {{ collection_name}}
+                            </a>
+                        </li>
+                    {{/each}}
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/promo">АКЦИИ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/payment-delivery">ОПЛАТА И ДОСТАВКА</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                    {{#if isAuthenticated}}
+                   href="/aromats-selection"
+                    {{else}}
+                   href="/" data-toggle="modal" data-target="#exampleModalCenter"
+                    {{/if}}
+                >ПОДБОР АРОМАТА</a>
+            </li>
+
+            <li class="nav-item"><hr/></li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">О компании</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">Связаться с нами</a>
+            </li>
+        </ul>
+    </div>
+</div>

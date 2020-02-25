@@ -1,0 +1,35 @@
+.product-page-main-info {
+    display: flex;
+    justify-content: space-around;
+    font: 12pt/14pt 'Noto Serif', sans-serif;
+}
+
+@media (max-width: 898px) {
+    .product-page-main-info{
+        flex-direction: column;
+    }
+}
+
+.product-page-main-info .image-wrapper {
+    text-align: center;
+    flex: 2;
+}
+
+.product-page-main-info .product-info-wrapper {
+    flex: 3;
+    text-align: center;
+}
+
+.breadcrumb {
+    background-color: white;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#aromat_page_description {
+    display: block;
+}
+
+#aromat_page_season, #aromat_page_ratings {
+    display: none;
+}

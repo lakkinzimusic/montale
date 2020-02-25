@@ -1,0 +1,24 @@
+{{> layouts/head }}
+{{> layouts/header }}
+
+<body>
+
+<div class="container login">
+
+
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6 login-main-part">
+            <div class="box">
+                <h2 class="text-center">Сброс пароля учётной записи</h2>
+           <form class="login-form d-flex flex-column align-items-center" action="/reset" method="POST">
+                    <input type="email" name="email" id="email" placeholder="Email">
+                    <button class="btn" type="submit">Получить письмо со ссылкой для смены пароля</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>
+
+{{> layouts/footer }}

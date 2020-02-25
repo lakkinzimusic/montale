@@ -1,0 +1,148 @@
+
+
+.delivheader {
+  margin: 50px 0;
+  .delivinfo {
+    width: 100%;
+    border: 1px solid black;
+    padding: auto 0;
+  }
+
+  .card-body {
+    padding: 1.25rem 0.5rem;
+  }
+
+  .card {
+    padding: auto 0;
+    border: 0;
+    background-color: transparent;
+    padding-left: 20px
+  }
+
+  .card-title{
+    font-size: 20px;
+    margin-bottom: 20px;
+    line-height: 1.2em;
+    text-transform: uppercase;
+    font-family: $main-font;
+  }
+
+  /* .card-text{
+      font-size: 20px;
+  } */
+
+  .black-card{
+    color: white;
+    background: black;
+  }
+
+  .black-card > .card > .card-body > .card-title {
+    font-size: 30px;
+  }
+
+  .black-card > .card > .card-body > .card-text {
+    font-size: 17px;
+  }
+
+  .white-card > .card > .card-body > .card-title {
+    font-size: 20px;
+    margin: 0 0 60px 0;
+  }
+
+  .white-card > .card > .card-body > .card-text {
+    font-size: 1em;
+    margin-bottom: 0;
+  }
+
+  body{
+    position: relative;
+  }
+
+  .delivery-line {
+    border: 0;
+    display: block;
+    background-color: black;
+    height: 1px;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    margin-top: 50px;
+  }
+
+  .megamenu-line {
+    border: 0;
+    display: block;
+    background-color: black;
+    height: 1px;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    margin-top: -100px;
+  }
+
+  .black-card {
+    position: relative;
+    &:after {
+      width: 0;
+      height: 0;
+      border-top: 16px solid transparent;
+      border-bottom: 16px solid transparent;
+      border-left: 16px solid black;
+      content: "";
+      position: absolute;
+      right: -17px;
+      top: calc(50% - 16px);
+    }
+  }
+}
+
+
+.btn-sdek {
+  background: #008000;
+  color: #fff;
+  height: 38px;
+  font-size: 1.1em;
+  &:hover{
+    color: #fff;
+  }
+}
+
+.btn-sdek-remove{
+  height: 38px;
+  font-size: 1.2em;
+  padding: 5px 20px;
+  background: #800002;
+  color: #fff;
+  &:hover{
+    color: #fff;
+  }
+}
+
+#sdekcalc{
+  padding: 20px;
+  border: solid 3px green;
+  width: 100%;
+  margin-bottom: 20px;
+  .small_input{
+    display: inline-block;
+    width: 5vw;
+  }
+
+}
+
+.sdekicon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 15vw;
+  margin-top: 25px;
+}
+
+.sdekicon > div:last-child {
+  margin-left: 10px;
+}
+
+.sdekicon i {
+  font-size: 200%;
+}
+

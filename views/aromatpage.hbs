@@ -1,0 +1,82 @@
+{{> layouts/head }}
+{{> layouts/header }}
+<hr>
+{{#each aromat}}
+    <div class="container">
+        <div class="product-page-main-info">
+            <div class="image-wrapper">
+                <img src="/{{this.[0].imageURL}}" alt="">
+
+            </div>
+
+            <div class="product-info-wrapper">
+                <h2 class="prodcut_name">{{@key}}</h2>
+                <p>{{this.properties.[Пол].value_name}} аромат</p>
+
+                <table class="table">
+                    {{#each this}}
+                        <tr>
+                            <td>{{product_name}}</td>
+                            <td>{{price}} руб</td>
+                            {{#if in_stock}}
+                                <td>
+                                    <button class="buy_button" onclick="addToCart('{{id}}')" type="submit">КУПИТЬ
+                                    </button>
+                                </td>
+                            {{else}}
+                                <td><span>Нет в наличии</span></td>
+                            {{/if}}
+
+                        </tr>
+                    {{/each}}
+                </table>
+
+
+            </div>
+        </div>
+        <div class="dropdown" id="accordionWrapper">
+
+            <div class="btn-group">
+                <a class="btn  dropdown-toggle" href="#" role="button" id="aromat_page_description_button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ОПИСАНИЕ</a>
+                <a class="btn  dropdown-toggle" href="#" role="button" id="aromat_page_season_button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ВРЕМЯ ГОДА И СУТОК</a>
+                <a class="btn  dropdown-toggle" href="#" role="button" id="aromat_page_ratings_button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ОТЗЫВЫ</a>
+            </div>
+            <div class="dropdown-menu">
+                <div class="dropdown-item" id="aromat_page_description" data-parent="#accordionWrapper">
+                    {{>aromat_page_description}}
+                </div>
+                <div class="dropdown-item" id="aromat_page_season" data-parent="#accordionWrapper">
+                    {{>aromat_page_season}}
+                </div>
+                <div class="dropdown-item" id="aromat_page_ratings" data-parent="#accordionWrapper">
+                    {{>aromat_page_ratings}}
+                </div>
+            </div>
+        </div>
+{{/each}}
+    <div class="recommendations">
+        <h3>ВАМ МОЖЕТ ПОНРАВИТЬСЯ</h3>
+        <hr>
+        {{#each productsMayLike }}
+            {{> productbox}}
+        {{/each}}
+    </div>
+
+    <div class="this-collection">
+        <h3>АРОМАТЫ ИЗ ЭТОЙ КОЛЛЕКЦИИ</h3>
+        <hr>
+        {{#each thisCollectionAromats }}
+            {{> productbox}}
+        {{/each}}
+    </div>
+</div>
+
+
+
+{{> layouts/footer }}

@@ -1,0 +1,23 @@
+{{> layouts/head }}
+{{> layouts/header }}
+<div class="info d-flex flex-column align-content-between">
+    <div class="info align-self-center mt-5 mb-5">
+        <h3>Оплата прошла неуспешно.</h3>
+        <h5> Как бы вы хотели поступить с заказом?</h5>
+    </div>
+
+    <form action="/cart/failed-order-processing" class="mt-5 mb-5" method="post">
+        <div class="form-group">
+            <input class="form-control" value='order-number' type="hidden" name="order-number"
+                   placeholder="Readonly input here…" readonly>
+        </div>
+        <div class="form-group d-flex justify-content-around ">
+            <button type="submit" value="update" name='action' class="btn btn-primary">Оплатить наличными при
+                получении
+            </button>
+            <button type="submit" value="cancelled" name='action' class="btn btn-secondary">Отменить заказ</button>
+            <button type="submit" value="repeat" name='action' class="btn btn-warning">Повторно оплатить заказ</button>
+        </div>
+    </form>
+</div>
+{{> layouts/footer }}

@@ -1,0 +1,26 @@
+{{> layouts/head }}
+{{> layouts/header }}
+<div class="info">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-grow">
+            <span>Загрузка</span>
+        </div>
+    </div>
+    <div class="centered">
+        <form method="post" id="payForm" action="https://wl.walletone.com/checkout/checkout/Index" accept-charset="UTF-8">
+            <input hidden name="WMI_MERCHANT_ID"    value="154661832812"/>
+            <input hidden name="WMI_PAYMENT_AMOUNT" value={{order.total_price}}>
+            <input hidden name="WMI_CURRENCY_ID"    value="643"/>
+            <input hidden name="WMI_PAYMENT_NO" value={{order.id}}>
+            <input hidden name="WMI_DESCRIPTION" value="Payment for order #{{order.id}} in MYSHOP.com"/>
+            <input hidden name="WMI_EXPIRED_DATE" value="2019-12-31T23:59:59"/>
+            <input hidden name="WMI_SUCCESS_URL" value="http://138.68.125.45:8081/cart/payment-success"/>
+            <input hidden name="WMI_FAIL_URL" value="http://138.68.125.45:8081/cart/payment-fail"/>
+            <input hidden name="WMI_PTENABLED" value="CreditCardRUB"/>
+            <input hidden name="WMI_SIGNATURE" value="{{sign}}"/>
+            <input hidden type="submit"/>
+        </form>
+
+    </div>
+</div>
+{{> layouts/footer }}

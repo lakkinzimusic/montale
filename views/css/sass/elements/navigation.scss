@@ -1,0 +1,47 @@
+.container .navigation {
+  margin: 2rem 1rem 2rem 1rem;
+  width: 100%;
+
+}
+
+.navigation ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.nav li a {
+  text-decoration: none;
+  color: black;
+  font: 12pt/14pt "Noto Serif", sans-serif;
+}
+
+.nav-item .collections {
+  position: relative;
+}
+
+#dropCollections{
+  position: absolute;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  z-index: 100;
+  background: white;
+}
+
+.collection-list{
+  column-count: 3;
+  column-rule: dotted 1px #333;
+  list-style-type: none;
+}
+.collection-list li {
+  text-align: center;
+}
+
+.collection-list a {
+  display: block;
+}
+
+#dropCollections img{
+  display: none;
+}

@@ -1,0 +1,20 @@
+#breadcrumbs {
+  padding: 0;
+  text-transform: uppercase;
+
+  * {
+    font-family: $main-font;
+  }
+
+  a {
+    color: #000;
+  }
+}
+
+@media (max-width: 898px) {
+  #breadcrumbs{
+    .breadcrumb-h1::before{
+      content: none;
+    }
+  }
+}

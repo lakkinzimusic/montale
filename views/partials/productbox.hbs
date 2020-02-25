@@ -1,0 +1,116 @@
+<div class="col-sm-4">
+    <div class="card product flex-column align-items-stretch">
+        <div class="card-header">
+            {{isFavourite}}
+            {{#if isFavourite}}
+
+                <img id="product{{category_id}}"
+
+                    {{#if isAuthenticated}}
+                     onclick="get('{{category_id}}')"
+                    {{else}}
+                     data-toggle="modal" data-target="#exampleModalCenter"
+                    {{/if}}
+                     class="heart" src="../imgs/heart-black.png"
+                     alt="">
+                <!--href="/add-favorite/{{id}}"-->
+            {{else}}
+                <img id="product{{category_id}}"
+                    {{#if isAuthenticated}}
+                     onclick="get('{{category_id}}')"
+                    {{else}}
+                     data-toggle="modal" data-target="#exampleModalCenter"
+                    {{/if}}
+                     class="heart"
+                     src="../imgs/heart-white.png"
+                     alt="">
+            {{/if}}
+            <div class="img-wrap">
+                <a href="perfume/{{this.[0].cat_slug}}">
+                    <img class="img-thumbnail" src="/{{ this.[0].imageURL }}">
+                </a>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title">{{@key}} </h5>
+            <p class="card-text"> Парфюмерная вода-спрей </p>
+            <div class="accordion" id="priceCollapse">
+
+                <div id="collapse20" class="collapse price show" aria-labelledby="collapse20"
+                     data-parent="#priceCollapse">
+                    <p class="card-text {{#if this.[0].promoPrice}} strikethrough {{/if}}">
+                        {{ this.[0].price }} руб
+
+                    </p>
+                    {{#if this.[0].promoPrice}}
+                        <span>{{this.[0].promoPrice}} руб</span>
+                    {{/if}}
+                    {{#unless this.[0].in_stock}}
+                        <span>Нет в наличии</span>
+                    {{/unless}}
+
+                    </div>
+                    <div id="collapse50" class="collapse price" aria-labelledby="collapse50" data-parent="#priceCollapse">
+                    <p class="card-text {{#if this.[1].promoPrice}} strikethrough {{/if}}">
+                    {{ this.[1].price }} руб
+
+                    </p>
+                    {{#if this.[1].promoPrice}}
+                        <span>{{this.[1].promoPrice}} руб</span>
+                    {{/if}}
+                        {{#unless this.[1].in_stock}}
+                            <span>Нет в наличии</span>
+                        {{/unless}}
+                </div>
+                <div id="collapse100" class="collapse price" aria-labelledby="collapse100" data-parent="#priceCollapse">
+                    <p class="card-text {{#if this.[2].promoPrice}} strikethrough {{/if}}">
+                        {{ this.[2].price }} руб
+
+                    </p>
+                    {{#if this.[2].promoPrice}}
+                        <span>{{this.[2].promoPrice}} руб</span>
+                    {{/if}}
+                    {{#unless this.[2].in_stock}}
+                        <span>Нет в наличии</span>
+                    {{/unless}}
+                </div>
+
+                <!--<p class="card-text">{{ this.[0].promoPrice }} руб АКЦИЯ</p>-->
+
+                <div class="milliliters d-flex justify-content-around">
+
+                    <button type="button" id="button20ml" class="btn btn-outline-dark priceButton"
+                            data-toggle="collapse" data-target="#collapse20"
+                            aria-expanded="true" aria-controls="collapse20">20 мл
+                    </button>
+                    <button type="button" id="button50ml" class="btn btn-outline-dark collapsed priceButton"
+                            data-toggle="collapse"
+                            data-target="#collapse50" aria-expanded="false" aria-controls="collapse50">50 мл
+                    </button>
+                    <button type="button" id="button100ml" class="btn btn-outline-dark collapsed priceButton"
+                            data-toggle="collapse"
+                            data-target="#collapse100" aria-expanded="false" aria-controls="collapse100">100 мл
+                    </button>
+                </div>
+
+                <!--<p class="more"><a href="#" class="button">Add to CartModel</a></p>-->
+
+            </div>
+            <div class="card-footer">
+
+                <button class="buy_button" id="buyButtion20ml" onclick="addToCart('{{this.[0].id}}')" type="submit">
+                    КУПИТЬ
+                </button>
+                <button class="buy_button" id="buyButtion50ml" onclick="addToCart('{{this.[1].id}}')" type="submit">
+                    КУПИТЬ
+                </button>
+                <button class="buy_button" id="buyButtion100ml" onclick="addToCart('{{this.[2].id}}')" type="submit">
+                    КУПИТЬ
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+{{> layouts/head }}
+{{> layouts/header }}
+<div class="background-image d-none d-md-block">
+
+</div>
+<div class="container main">
+
+    {{> bodyheader}}
+
+
+
+    <div class="row">
+        {{#if categories.length}}
+            {{#each categories  }}
+                {{> productboxTEST isAuthenticated=../isAuthenticated category=this}}
+            {{/each}}
+        {{else}}
+            <div class="alert alert-danger" role="alert">
+                Товары отсутствуют в данной коллекции
+            </div>
+        {{/if}}
+    </div>
+
+</div>
+{{> layouts/footer }}

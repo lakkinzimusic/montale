@@ -1,0 +1,211 @@
+{{> layouts/head }}
+{{> layouts/header }}
+
+<div class="container" id="cart">
+    <form action="/cart/create-order" method="POST" id="createOrderForm">
+        <div class="row">
+            <div class="col">
+                <h2>Покупатель</h2>
+                <hr class="mb-5">
+
+                {{#if errorMessages}}
+                    {{#each errorMessages}}
+                        <div class="alert alert-danger" role="alert">{{msg}}</div>
+                    {{/each}}
+                {{/if}}
+                <div class="form-group">
+                    <label for="validationDefault01">Имя покупателя</label>
+                    <input type="text" name='user_fullname' class="form-control" id="validationDefault01"
+                           placeholder="Имя покупателя"
+                           value="{{userFullname}} " required>
+                </div>
+
+                <div class="form-group">
+                    <label for="validationDefaultUsername">Email</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                        </div>
+                        <input type="text" name='email' class="form-control" id="validationDefaultUsername"
+                               value="{{user.email}}" placeholder="Email" aria-describedby="inputGroupPrepend2"
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="validationDefault05">Телефон</label>
+                    <input type="text" name='user_phone' value="{{user.phone}}" class="form-control tel"
+                           id="validationDefault05"
+                           placeholder="Телефон" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="validationDefault03">Метод доставки</label>
+                    <select class="custom-select form-control" onchange='pickupAdress()' name="delivery_method"
+                            id="deliveryMethods" required>
+                        {{#each deliveryMethods}}
+                            <option id="deliveryMethod-{{id}}" value="{{id}}"
+                                {{#ifeq ../pre_selected_delivery_method id}}
+                                    selected
+                                {{/ifeq}}
+                            >{{label}}
+                            </option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="validationDefault03">Метод оплаты</label>
+
+                    <select class="custom-select form-control" name="payment_method" id="paymentMethods" required>
+                        {{#each defaultPaymentMethods}}
+                            <option id="paymentMethod-{{id}}" value="{{id}}"
+                                {{#ifeq ../pre_selected_payment_method id}}
+                                    selected
+                                {{/ifeq}}
+                            >{{label}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="validationDefault03">Город</label>
+                    <div id="pre_selected_delivery_method" hidden>{{pre_selected_delivery_method}}</div>
+                    <div id="sdek-city">
+                        <input type="hidden" name="version" value="1.0"/>
+                        <input type="hidden" name="dateExecute" value="{{date null "YYYY-MM-DD"}}"/>
+                        <input type="hidden" name="tariffId" value="11"/>
+                        <input class="form-control" value="0.3" type="hidden" placeholder="Вес"
+                               name="goods[0].weight"/>
+                        <input class="form-control" value="5" type="hidden" placeholder="Длина"
+                               name="goods[0].length"/>
+                        <input class="form-control" value="5" type="hidden" placeholder="Ширина"
+                               name="goods[0].width"/>
+                        <input class="form-control" value="14" type="hidden" placeholder="Высота"
+                               name="goods[0].height"/>
+                        <input class="form-control" type="hidden" id="city3_input" name="city"/>
+                        <input type="hidden" name="senderCityId" id="city3_input_id" value=""/>
+
+
+                        <input class="form-control" autocomplete="off" type="text" id="city4_input" name="city2" value="" required/>
+                        <input type="hidden"  name="receiverCityId" id="city4_input_id" value=""/>
+                    </div>
+                    <div id="default-city">
+                        <select class="custom-select form-control" name="city2" required>
+                            <option selected value="Москва">Москва</option>
+                            <option value="Санкт-Петербург">Санкт-Петербург</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="validationDefault04">Адрес доставки</label>
+                    <input type="text" name='delivery_adress' class="form-control" id="validationDefault04"
+                           value="{{oldInput.delivery_adress}}" placeholder="Адрес" required>
+
+                </div>
+                <div class="form-group">
+                    <label for="validationDefault04">Комментарий к заказу</label>
+                    <input type="textarea" name='comment' class="form-control" id="validationDefault04"
+                           value="{{oldInput.comment}}" placeholder="Комментарий к заказу">
+                </div>
+            </div>
+            <div class="col-sm-4">
+
+                <h2>Товары</h2>
+                <hr class="mb-5">
+                <div class="hidden" id="hidden_quantity">
+                    {{cart_quantity}}
+                </div>
+                {{#each cart.cart_items }}
+                    <div class="row no-gutters cart_item small mb-3" data-item="{{this.id}}">
+                        <div class="col-3">
+                            <div class="image-wrapper">
+                                <img src="/{{this.product.imageURL}}" class="card-img" alt="...">
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="card-body py-0">
+                                <h5 class="card-title product-name">
+                                    {{#if this.product.meta_data.aromat_name}}
+                                        {{this.product.meta_data.aromat_name}}
+                                    {{else}}
+                                        {{this.product.product_name}}
+                                    {{/if}}
+                                </h5>
+                                <div>
+                                    <p class="cart_product_hint">
+                                        {{this.product.meta_data.hint}}
+                                    </p>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{#if this.product.meta_data.volume}}
+                                                <div class="cart_product_volume">
+                                                    {{this.product.meta_data.volume}}{{this.product.meta_data.measure}}
+                                                </div>
+                                            {{/if}}
+
+                                            {{#if this.kit.length}}
+                                                <div>
+                                                    {{#each this.kit}}
+                                                        <div class="cart_kit_el">
+                                                            <small>{{this.category_name}}</small>
+                                                        </div>
+                                                    {{/each}}
+                                                </div>
+                                            {{/if}}
+                                        </div>
+                                        <div class="col">
+                                            <div class="cart_product_price text-right">
+
+                                                {{#if this.promoPrice}}
+                                                    <b style="color: red">{{this.promoPrice}} руб.</b>
+                                                    x {{this.quantity}} шт.
+                                                {{else}}
+                                                    <b>{{this.product.price}}</b> руб. x {{this.quantity}} шт.
+                                                {{/if}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-5"/>
+                {{/each}}
+                <div>
+                    <div hidden id="help-sum-price">{{cart.totalPrice}}</div>
+                    <p id="totalPrice" class="text-center">Сумма заказа: <span>
+                        {{#if cart.promocodePrice}}
+                            {{cart.promocodePrice}}
+                        {{else}}
+                            {{cart.totalPrice}}
+                        {{/if}}
+                    </span> руб.</p>
+                    <p id="delivery-cost" class="text-center" hidden></p>
+                </div>
+                <div class="d-flex flex-column justify-content-center mb-5">
+                    <p class="align-self-center">
+                        <small>Оформляя заказ, вы подтверждаете, что ознакомились с договором публичной оферты</small>
+                    </p>
+                    <p class="align-self-center">
+                        <small><a class="nav-link" href="/offer">Договор оферты</a></small>
+                    </p>
+                    <button type="success" class="btn-largest align-self-center btn btn-dark mx-4"
+                            id="createOrderButton">Оформить заказ
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+    <script src="/js/bootstrap_autocomplete.js" type="text/javascript"></script>
+    <script src="/js/form2js.js" type="text/javascript"></script>
+    <script src="/js/sdek_calc.js" type="text/javascript"></script>
+</div>
+
+
+
+{{> layouts/footer }}

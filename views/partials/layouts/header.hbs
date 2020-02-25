@@ -1,0 +1,76 @@
+<body>
+
+
+<div class="container header">
+    <div class="row header m-0 mt-4">
+        <div class=" d-none d-xl-block col-xl-4">
+
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-4 img-fluid logo">
+            <a href="/">
+                <img src="../imgs/logo.png" alt="-" class="img-fluid">
+            </a>
+        </div>
+
+
+        <div class="action col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 d-flex d-flex justify-content-center justify-content-md-center justify-content-sm-center align-items-top">
+
+            <div class="dropdown auth">
+                {{#unless  isAuthenticated}}
+
+                    <a class="dropdown-toggle header_popover_link"
+                       data-toggle="modal" data-target="#exampleModalCenter">
+                        Войти
+                    </a>
+
+
+                {{else}}
+                    <a class="dropdown-toggle header_popover_link"
+                       data-template='<div class="popover cart_popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+                       data-placement="bottom" data-toggle="popover" data-html="true" data-content='{{>account_popover}}'>
+                        {{user.username}}
+                    </a>
+
+                {{/unless }}
+            </div>
+
+
+            <a class="dropdown-toggle header_popover_icon" id="fav_button"
+               data-template='<div class="popover cart_popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+               data-placement="bottom" data-toggle="popover" data-html="true" data-content='{{>favourites_popover}}'>
+                <span class="header_badge badge favorite cart-quantity badge-dark" id="favorite_quantity">{{favourites_products.length}}</span>
+                <img src="../imgs/heart.png" alt="-">
+            </a>
+
+            <a class="dropdown-toggle header_popover_icon" id="cart_button"
+               data-template='<div class="popover cart_popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+               data-placement="bottom" data-toggle="popover" data-html="true" data-content='{{>cart_popover}}'>
+                <span class="header_badge badge cart-quantity badge-dark" id="cart_quantity">{{cart.cart_items.length}}</span>
+                <img src="../imgs/shopping-bag.png" alt="-">
+            </a>
+
+            <a class="dropdown-toggle header_popover_icon" id="search_popover_button"
+               data-template='<div class="popover cart_popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+               data-placement="bottom"
+               data-html="true"
+            >
+                <img src="../imgs/search.png" alt="-">
+                {{>search_popover}}
+            </a>
+
+            <a href="#" class="d-inline-block d-lg-none text-black mt-1" id="menu_toggler">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-times"></i>
+            </a>
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+{{> navigation}}
+{{> slidemenu}}

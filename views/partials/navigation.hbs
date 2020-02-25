@@ -1,0 +1,71 @@
+<div class="container navigation d-none d-lg-block" id="main_menu">
+    <div class="row navigation d-flex justify-content-between m-0 my-4">
+        <ul class="col-sm-12 nav justify-content-around align-items-center flex-column flex-md-row m-sm-0">
+            <li class="nav-item">
+                <a class="nav-link" href="/new-products">НОВИНКИ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/bestsellers">БЕСТСЕЛЛЕРЫ</a>
+            </li>
+
+            <li class="nav-item collections">
+                <a class="nav-link megamenu-link" href="#" data-menu="#megamenu_collections">КОЛЛЕКЦИИ</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/promo">АКЦИИ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/payment-delivery">ОПЛАТА И ДОСТАВКА</a>
+            </li>
+            <!--<li class="nav-item">-->
+                <!--<a class="nav-link"-->
+                    <!--{{#if isAuthenticated}}-->
+                   <!--href="/aromats-selection"-->
+                    <!--{{else}}-->
+                   <!--href="/" data-toggle="modal" data-target="#exampleModalCenter"-->
+                    <!--{{/if}}-->
+                <!--&lt;!&ndash;>ПОДБОР АРОМАТА</a>-->
+            <!--</li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">МАГАЗИНЫ</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="megamenu_container">
+    <div class="megamenu" id="megamenu_collections">
+        {{> megamenu_collections}}
+    </div>
+</div>
+
+
+</div>
+</div>
+<div class="collapse" id="dropCollections">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-2">
+                {{#each collections }}
+                    <a href="/id&sortType/{{id}}">
+                        <img class="product-box-image" src="/{{ image_url }}">
+                    </a>
+                {{/each}}
+            </div>
+            <div class="col-sm-6">
+
+                <ul class="collection-list">
+                    {{#each collections }}
+                        <li><a href="/id&sortType/{{id}}">{{collection_name}}</a></li>
+                    {{/each}}
+                </ul>
+
+            </div>
+            <div class="col-sm-2"></div>
+
+
+        </div>
+    </div>
+</div>
